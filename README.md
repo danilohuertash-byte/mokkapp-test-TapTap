@@ -17,12 +17,14 @@ docs/         Auditoría del sistema + framework/skill usado para generarla
 
 ## Tokens
 
+**`tokens/tokens.json` es la fuente viva**, sincronizada directamente desde Figma con el plugin **Tokens Studio**. El flujo es: editas un token en Figma → le das a Push (⬆) en el plugin → este archivo se actualiza solo en GitHub. No se edita a mano.
+
 131 variables de Figma, en 2 colecciones:
 
 - **Primitives** (109): la paleta base — Neutral, Primary, Auxiliary, Danger, Warning, Success, Info, Chart Colors, tipografía (tamaños, line-height, letter-spacing), `font-family`.
 - **Semantic** (22): capa semántica que debería aliasear a Primitives (`color/text/primary`, `color/bg/surface`, `color/action/primary`, `color/feedback/error`, etc.) — es la capa que consume el código.
 
-Regenerar tras un cambio en Figma: volver a exportar las Variables (vía Figma Console MCP o Tokens Studio) y sobrescribir `tokens/tokens.json`, luego regenerar `tokens.css` / `tokens.ts` a partir de él.
+`tokens/tokens.css` y `tokens/tokens.ts` son una **foto fija del día 1** (generados a mano antes de conectar Tokens Studio) y ya están desactualizados frente a `tokens.json`. Pendiente: automatizar su regeneración a partir de `tokens.json` (por ejemplo con Style Dictionary) cada vez que este cambie — por ahora, si necesitas CSS/TS al día, regenéralos manualmente desde `tokens.json`.
 
 ## Componentes
 
